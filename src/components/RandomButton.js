@@ -1,10 +1,26 @@
 import React from "react";
 import { getRandomPlaneteer } from "../data/planeteers";
 
-function RandomButton() {
+function RandomButton({ planeteers, onAddPlaneteer }) {
   function handleClick() {
     const randomPlaneteer = getRandomPlaneteer();
-    console.log("For the advanced deliverables", randomPlaneteer);
+    // planeteers.map((planeteer) => {
+    //   if (planeteer.name === randomPlaneteer.name) alert('Planeteer is already shown')
+    //   else updatePlaneteer(randomPlaneteer)
+    // })
+    updatePlaneteer(randomPlaneteer)
+  }
+
+  const updatePlaneteer = (randomPlaneteer) => {
+    fetch('http://localhost:8003/planeteers', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(randomPlaneteer)
+    })
+      .then((res) => res.json())
+      .then(onAddPlaneteer(randomPlaneteer))
   }
 
   return (

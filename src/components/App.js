@@ -14,6 +14,11 @@ function App() {
       .then(setPlaneteers)
   }, [])
 
+  const handleAddPlaneteer = (newPlaneteer) => {
+    const updatedPlaneteerArray = [...planeteers, newPlaneteer]
+    setPlaneteers(updatedPlaneteerArray)
+  }
+
   const handleSearch = (newSearch) => {
     setSearch(newSearch)
   }
@@ -27,7 +32,7 @@ function App() {
     <div>
       <Header />
       <SearchBar onSearch={handleSearch}/>
-      <RandomButton />
+      <RandomButton planeteers={planeteers} onAddPlaneteer={handleAddPlaneteer}/>
       <PlaneteersContainer
         planeteers={displayedPlaneteers}
       />

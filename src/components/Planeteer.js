@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function Planeteer({ planeteer }) {
-  const { id, name, fromUSA, born, bio, quote, pictureUrl, twitter} = planeteer
+  const { name, fromUSA, born, bio, quote, pictureUrl, twitter} = planeteer
   const [showBio, setShowBio] = useState(true)
 
   const toggleBio = () => {
