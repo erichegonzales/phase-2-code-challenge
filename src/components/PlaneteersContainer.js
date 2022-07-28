@@ -1,14 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Planeteer from "./Planeteer";
 
-function PlaneteersContainer() {
-  const [planeteers, setPlaneteers] = useState([])
-
-  useEffect(() => {
-    fetch('http://localhost:8003/planeteers')
-    .then((res) => res.json())
-    .then(setPlaneteers)
-  }, [])
+function PlaneteersContainer({ planeteers }) {
 
   const planeteerCards = planeteers.map((planeteerObj) => {
     return <Planeteer key={planeteerObj.id} planeteer={planeteerObj} />
