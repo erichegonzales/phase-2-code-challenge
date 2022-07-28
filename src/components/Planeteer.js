@@ -6,8 +6,11 @@ function Planeteer({ planeteer }) {
 
   const toggleBio = () => {
     setShowBio(showBio => !showBio)
-    console.log(showBio)
   }
+
+  const date = new Date()
+  const year = date.getFullYear()
+  let age = year - born
 
   return (
     <li className="cards__item">
@@ -24,9 +27,8 @@ function Planeteer({ planeteer }) {
             `Bio: ${bio}` : `Quote: ${quote}`}</p>
           <div className="card__detail">
             <p>{twitter}</p>
-            <p>
-              {fromUSA ? 'USA-based' : 'Working overseas'}
-            </p>
+            <p>{fromUSA ? 'USA-based' : 'Working overseas'}</p>
+            <p>{`Age: ${age}`}</p>
           </div>
         </div>
       </div>
