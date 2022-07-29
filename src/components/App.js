@@ -7,7 +7,7 @@ import SearchBar from "./SearchBar";
 function App() {
   const [planeteers, setPlaneteers] = useState([])
   const [search, setSearch] = useState('')
-  const [type, setType] = useState(false)
+  const [sort, setSort] = useState(false)
 
   useEffect(() => {
     fetch('http://localhost:8003/planeteers')
@@ -24,19 +24,20 @@ function App() {
     setSearch(newSearch)
   }
 
-  const handleAgeSort = (bool) => {
-    if (bool === true) setType('born')
-    else setType('id')
+  const handleAgeSort = () => {
+    setSort(!sort)
   }
 
-  const sortedPlaneteers = planeteers.sort((planeteer1, planeteer2) => {
-    return planeteer2.born - planeteer1.born
+  let displayedPlaneteers = planeteers.filter((planeteer) => {
+    return (planeteer.name.toLowerCase().includes(search.toLowerCase())
+      || planeteer.bio.toLowerCase().includes(search.toLowerCase()))
   })
 
-  const displayedPlaneteers = sortedPlaneteers.filter((planeteer) => {
-    return (planeteer.name.toLowerCase().includes(search.toLowerCase()) 
-    || planeteer.bio.toLowerCase().includes(search.toLowerCase()))
-  })
+  if (sort === true) {
+    displayedPlaneteers = displayedPlaneteers.sort((planeteer1, planeteer2) => {
+      return planeteer2.born - planeteer1.born
+    })
+  }
 
   return (
     <div>
